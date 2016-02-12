@@ -112,7 +112,9 @@ export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 
 # pipsi
-curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
+if [ ! -f /Users/krockman/.local/bin/pipsi ]; then
+	curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
+fi
 export PATH="$HOME/.local/bin:$PATH"
 
 export EDITOR="vim"
