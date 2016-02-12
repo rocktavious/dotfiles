@@ -2,11 +2,7 @@
 alias ls='ls --color'
 alias ll='ls -lAF'
 
-alias be='bundle exec'
-
 alias packer='packer-color --auronly'
-
-alias git=hub
 
 function gcb() {
   git branch | grep '^\*' | cut -c3-
@@ -25,22 +21,6 @@ function gfb() {
   fi
 }
 
-function rails_personal() {
-  rails new $* --skip-bundle --database=postgresql --skip-test-unit --template=https://raw.github.com/benhamill/omakase/master/hamill_time.rb
-}
-
-function new_gem() {
-  ~/.bash/new_gem $*
-}
-
-function gem_projection() {
-  ~/.bash/gem_projection $*
-}
-
-function elixir_projection() {
-  ~/.bash/elixir_projection $*
-}
-
 function pair_term() {
   echo "XTerm*FaceSize: 13" | xrdb -merge -
 }
@@ -49,6 +29,20 @@ function solo_term() {
   echo "XTerm*FaceSize: 11" | xrdb -merge -
 }
 
-function raw_imap() {
-  openssl s_client -connect $1 -crlf
+function venv() {
+  . /Users/krockman/.local/venvs/${1}/bin/activate
+}
+
+function rde() {
+ ssh -t $1 sudo docker exec -it service_app bash
+}
+
+function dc() {
+  docker-compose $@
+}
+
+function docker-cleanup() {
+  docker ps -a -q -f "status=exited" | xargs docker rm
+  docker images --filter "dangling=true" -q | xargs docker rmi
+  docker volume ls -qf dangling=true | xargs docker volume rm
 }

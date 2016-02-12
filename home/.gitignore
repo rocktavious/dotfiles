@@ -1,8 +1,38 @@
-*.swp
-*.swo
-.netrwhist
-tags
-.bundle
-tags-ja
-.~lock.*
-.projections.json
+# Backup files
+*.~
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Python Distribution / packaging
+*.egg-info/
+*.egg
+MANIFEST
+AUTHORS
+ChangeLog
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+junit.xml
+flake8.txt
+
+# Database files
+*.sqlite
+
+# Apple
+.DS_Store

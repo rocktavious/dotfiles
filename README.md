@@ -1,26 +1,16 @@
 # Dotfiles!
 
 Customizations for my bash environment. Feel free to crib from it, but I highly
-suggest you start your own from scratch. For instance, you might try [this
-super basic
-`.vimrc`](http://vimuniversity.com/samples/your-first-vimrc-should-be-nearly-empty).
+suggest you start your own from scratch.
 
-The repo is structured to play nicely with
+The repo is structured to play nicely with shell version of homesick
 [homesick](http://rubygems.org/gems/homesick).
+[homeshick](https://github.com/andsens/homeshick).
 
-## Homesicking It Up
-
-First time:
-
-```
-gem install homesick
-homesick clone benhamill/dotfiles
-```
-
-To symlink new files:
+## Homeshicking It Up
 
 ```
-homesick symlink dotfiles
+curl https://raw.githubusercontent.com/rocktavious/dotfiles/master/bootstrap.sh | bash
 ```
 
 ## License

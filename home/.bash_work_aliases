@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function reset_2fa() {
+    ssh -t salt.uacf.io sudo ssh -t openvpnas@internal-vpn.uacf.io sudo /usr/local/openvpn_as/scripts/sacli --user $1 GoogleAuthRegen
+}
