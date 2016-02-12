@@ -108,14 +108,14 @@ if [ -f ~/.bash_prompt ]; then
   . ~/.bash_prompt
 fi
 
-# OHGOD use vi bindings
-set -o vi
+# use vi bindings in terminal
+# set -o vi
 
 # Use go as a normal user
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 
-# pipsi
+# add pipsi bin to path
 export PATH="$HOME/.local/bin:$PATH"
 
 export EDITOR="vi"
