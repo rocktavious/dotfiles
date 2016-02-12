@@ -57,10 +57,21 @@ function error_code () {
   fi
 }
 
+function get_local_ip () {
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ]; then
+        echo "\u@" $(ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}')
+    fi
+}
+
+function get_venv () {
+    if [ -n "$VIRTUAL_ENV" ]; then
+        echo "("`basename $VIRTUAL_ENV`")"
+    fi
+}
+
 function ps1_function {
   error_code=$?
-  export PS1="${MAGENTA}●${NORMAL} \W$(parse_git_branch) ${RED}$(error_code $error_code)${NORMAL}${CYAN}❱${NORMAL} "
-  # export PS1="${MAGENTA}●${NORMAL} \W$(parse_git_branch) ${CYAN}❱${NORMAL} "
+  export PS1="${MAGENTA}●${NORMAL}$(get_local_ip)$(get_venv) \W$(parse_git_branch) ${RED}$(error_code $error_code)${NORMAL}${CYAN}❱${NORMAL} "
 }
 
 export PROMPT_COMMAND='ps1_function'

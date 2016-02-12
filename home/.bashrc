@@ -1,13 +1,13 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+
+# If not running interactively, don't do anything
+if [ "$PS1" ]; then
+
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
 export PLATFORM=`uname`
-
-# If not running interactively, don't do anything
-if [ "$PS1" ]; then
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -117,9 +117,6 @@ export PATH=$PATH:$GOPATH/bin
 
 # pipsi
 export PATH="$HOME/.local/bin:$PATH"
-if [ ! -f $HOME/.local/bin/pipsi ]; then
-	curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
-fi
 
 export EDITOR="vi"
 

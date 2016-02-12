@@ -49,3 +49,10 @@ function docker-cleanup() {
   docker images --filter "dangling=true" -q | xargs docker rmi
   docker volume ls -qf dangling=true | xargs docker volume rm
 }
+
+function install_pipsi() {
+    if [ ! -f $HOME/.local/bin/pipsi ]; then
+        curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
+    fi
+}
+
