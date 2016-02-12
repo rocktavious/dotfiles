@@ -1,5 +1,8 @@
 #!/bin/bash
-alias ls='ls --color'
+if [[ $PLATFORM == 'linux' ]]; then
+    alias ls='ls --color'
+fi
+
 alias ll='ls -lAF'
 
 alias packer='packer-color --auronly'

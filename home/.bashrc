@@ -4,6 +4,8 @@
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
+export PLATFORM=`uname`
+
 # If not running interactively, don't do anything
 if [ "$PS1" ]; then
 
@@ -15,7 +17,9 @@ HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
 
 # allow for ** globbing of directories
-shopt -s globstar
+if [[ $PLATFORM == 'linux' ]]; then
+    shopt -s globstar
+fi
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
