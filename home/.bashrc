@@ -17,7 +17,7 @@ HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
 
 # allow for ** globbing of directories
-if [[ $PLATFORM == 'linux' ]]; then
+if [[ $PLATFORM == 'Linux' ]]; then
     shopt -s globstar
 fi
 
@@ -90,7 +90,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 if [ -f ~/.bash_work_aliases ]; then
-	. ~/.bash_aliases
+    . ~/.bash_aliases
 fi
 
 if [ -f ~/.bashrc.local ]; then
@@ -116,12 +116,12 @@ export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 
 # pipsi
-if [ ! -f /Users/krockman/.local/bin/pipsi ]; then
+export PATH="$HOME/.local/bin:$PATH"
+if [ ! -f $HOME/.local/bin/pipsi ]; then
 	curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
 fi
-export PATH="$HOME/.local/bin:$PATH"
 
-export EDITOR="vim"
+export EDITOR="vi"
 
 if [[ $(which google-chrome-stable 2> /dev/null) ]]; then
   export BROWSER="google-chrome-stable"
@@ -129,28 +129,4 @@ else
   export BROWSER=""
 fi
 
-export EC2_KEYPAIR=bencos
-export EC2_URL=https://ec2.us-east-1.amazonaws.com
-export EC2_PRIVATE_KEY=$HOME/.ec2/pk-YBSJD3UQADEXGEX5SRTVJQBLAU3S23A5.pem
-export EC2_CERT=$HOME/.ec2/cert-YBSJD3UQADEXGEX5SRTVJQBLAU3S23A5.pem
-
-# Ruby garbage collection stuff
-export RUBY_GC_HEAP_INIT_SLOTS=500000
-export RUBY_HEAP_SLOTS_INCREMENT=250000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_GC_MALLOC_LIMIT=50000000
-
-# Rubunius in 1.9 mode
-export RBXOPT=-X19
-
-# z support
-if [ -f /etc/profile.d/z.sh ]; then
-    . /etc/profile.d/z.sh
-fi
-if [ -f /usr/lib/z.sh ]; then
-    . /usr/lib/z.sh
-fi
-
 fi # Close the if started on line 1.
-
-eval `keychain --eval --agents ssh id_rsa`

@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ $PLATFORM == 'linux' ]]; then
+if [[ $PLATFORM == 'Linux' ]]; then
     alias ls='ls --color'
 fi
 
