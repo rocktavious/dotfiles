@@ -111,12 +111,9 @@ set -o vi
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 
-# personal binaries should be in the path.
-export PATH="$HOME/bin:$PATH"
-
-# make sure rbenv shit is in the PATH.
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# pipsi
+curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
+export PATH="$HOME/.local/bin:$PATH"
 
 export EDITOR="vim"
 
