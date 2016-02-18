@@ -118,7 +118,7 @@ export PATH=$PATH:$GOPATH/bin
 # add pipsi bin to path
 export PATH="$HOME/.local/bin:$PATH"
 
-export EDITOR="vi"
+# export EDITOR="vi"
 
 if [[ $(which google-chrome-stable 2> /dev/null) ]]; then
   export BROWSER="google-chrome-stable"

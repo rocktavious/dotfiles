@@ -43,6 +43,10 @@ function rde() {
 function dc() {
   docker-compose $@
 }
+function dc-cleanup() {
+    dc kill
+    dc rm -f
+}
 
 function docker-cleanup() {
   docker ps -a -q -f "status=exited" | xargs docker rm
