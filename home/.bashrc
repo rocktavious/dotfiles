@@ -104,6 +104,12 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+if [[ $PLATFORM == 'Darwin' ]]; then
+    if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+        . $(brew --prefix)/share/bash-completion/bash_completion
+    fi
+fi
+
 if [ -f ~/.bash_prompt ]; then
   . ~/.bash_prompt
 fi
