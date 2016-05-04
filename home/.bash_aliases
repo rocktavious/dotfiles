@@ -43,9 +43,10 @@ function rde() {
 function dc() {
   docker-compose $@
 }
-function dc-cleanup() {
+function dcc() {
     dc kill
     dc rm -f
+    docker-cleanup
 }
 
 function docker-cleanup() {
