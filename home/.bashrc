@@ -114,17 +114,10 @@ if [ -f ~/.bash_prompt ]; then
   . ~/.bash_prompt
 fi
 
-# use vi bindings in terminal
-# set -o vi
-
-# Use go as a normal user
-export GOPATH=~/go
-export PATH=$PATH:$GOPATH/bin
+set -o emacs
 
 # add pipsi bin to path
 export PATH="$HOME/.local/bin:$PATH"
-
-# export EDITOR="vi"
 
 if [[ $(which google-chrome-stable 2> /dev/null) ]]; then
   export BROWSER="google-chrome-stable"
