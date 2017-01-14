@@ -1,5 +1,10 @@
 #!/bin/bash
 
 function reset_2fa() {
-    ssh -t salt.uacf.io sudo ssh -t openvpnas@internal-vpn.uacf.io sudo /usr/local/openvpn_as/scripts/sacli --user $1 GoogleAuthRegen
+    ssh -i ~/.ssh/infra01.pem openvpnas@172.29.0.10 sudo /usr/local/openvpn_as/scripts/sacli --user $1 GoogleAuthRegen
+}
+
+function fuck_docker() {
+    docker-machine rm default
+    docker-machine create default --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "8192" --virtualbox-disk-size "100000" --engine-opt bip=172.29.1.1/16
 }

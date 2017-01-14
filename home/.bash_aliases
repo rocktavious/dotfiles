@@ -40,6 +40,18 @@ function rde() {
  ssh -t $1 sudo docker exec -it service_app bash
 }
 
+function rdt() {
+ ssh -t $1 sudo supervisorctl tail -f service-app
+}
+
+function dkr() {
+  docker kill $1 && docker rm $1
+}
+
+function de() {
+  docker exec -it $@
+}
+
 function dc() {
   docker-compose $@
 }

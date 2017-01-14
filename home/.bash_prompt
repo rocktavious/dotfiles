@@ -74,4 +74,4 @@ function ps1_function {
   export PS1="${MAGENTA}●${NORMAL}$(get_local_ip)$(get_venv) \W$(parse_git_branch) ${RED}$(error_code $error_code)${NORMAL}${CYAN}❱${NORMAL} "
 }
 
-export PROMPT_COMMAND='ps1_function'
+export PROMPT_COMMAND='ps1_function;'
