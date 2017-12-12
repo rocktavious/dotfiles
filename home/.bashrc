@@ -117,7 +117,7 @@ fi
 set -o emacs
 
 # add pipsi bin to path
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/sbin:$PATH"
 
 if [[ $(which google-chrome-stable 2> /dev/null) ]]; then
   export BROWSER="google-chrome-stable"

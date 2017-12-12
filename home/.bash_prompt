@@ -69,9 +69,18 @@ function get_venv () {
     fi
 }
 
+function kubernetes_context(){
+    if [ -n "$KUBECONFIG" ]; then
+        CONTEXT=$(kubectl config current-context)
+        if [ -n "$CONTEXT" ]; then
+            echo "${CYAN}[KubeCtx: ${CONTEXT}]${NORMAL}"
+        fi
+    fi
+}
+
 function ps1_function {
   error_code=$?
-  export PS1="${MAGENTA}●${NORMAL}$(get_local_ip)$(get_venv) \W$(parse_git_branch) ${RED}$(error_code $error_code)${NORMAL}${CYAN}❱${NORMAL} "
+  export PS1="${MAGENTA}●${NORMAL}$(get_local_ip)$(get_venv) \W$(parse_git_branch) ${RED}$(error_code $error_code)${NORMAL}$(kubernetes_context)${CYAN}❱${NORMAL} "
 }
 
 export PROMPT_COMMAND='ps1_function;'

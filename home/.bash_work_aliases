@@ -1,10 +1,29 @@
 #!/bin/bash
+function sshi () {
+    ssh -i ./.ssh/infra01.pem ec2-user@$1
+}
 
-function reset_2fa() {
+function stopcron () {
+    ssh -t $1 sudo service crond stop
+}
+
+function startcron () {
+    ssh -t $1 sudo service crond start
+}
+
+function reset_2fa () {
     ssh -i ~/.ssh/infra01.pem openvpnas@172.29.0.10 sudo /usr/local/openvpn_as/scripts/sacli --user $1 GoogleAuthRegen
 }
 
-function fuck_docker() {
+function bootstrap_inspect () {
+    ssh -t $1 sudo cat /var/log/salt-bootstrap.log.1 | grep -B 5 -A 20 "Result: False"
+}
+
+terminate_asg_ec2 (){
+   aws autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id $1
+}
+
+function fuck_docker () {
     docker-machine rm default
     docker-machine create default --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "8192" --virtualbox-disk-size "100000" --engine-opt bip=172.29.1.1/16
 }

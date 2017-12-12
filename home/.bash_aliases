@@ -65,6 +65,7 @@ function docker-cleanup() {
   docker ps -a -q -f "status=exited" | xargs docker rm
   docker images --filter "dangling=true" -q | xargs docker rmi
   docker volume ls -qf dangling=true | xargs docker volume rm
+  docker network ls -q | xargs docker network rm
 }
 
 function install_pipsi() {
