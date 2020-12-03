@@ -126,3 +126,23 @@ else
 fi
 
 fi # Close the if started on line 1.
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/krockman/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/Users/krockman/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/krockman/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/krockman/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+complete -C /usr/local/bin/vault vault
+
+# added by travis gem
+[ -f /Users/krockman/.travis/travis.sh ] && source /Users/krockman/.travis/travis.sh
+
+source /Users/krockman/.bazel/bin/bazel-complete.bash
+PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+export GOPATH="${HOME}/go"
+export GOROOT=$(brew --prefix golang)/libexec
+export GOBIN="${HOME}/go/bin"
+export PATH=$PATH:$GOPATH/bin
+
+export PATH=$PATH:$HOME/bin:/usr/local/bin

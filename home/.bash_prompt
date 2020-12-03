@@ -70,12 +70,10 @@ function get_venv () {
 }
 
 function kubernetes_context(){
-    if [ -n "$KUBECONFIG" ]; then
         CONTEXT=$(kubectl config current-context)
         if [ -n "$CONTEXT" ]; then
-            echo "${CYAN}[KubeCtx: ${CONTEXT}]${NORMAL}"
+            echo "${CYAN}[${CONTEXT}:$(kubectl config view --minify --output 'jsonpath={..namespace}')]${NORMAL}"
         fi
-    fi
 }
 
 function ps1_function {

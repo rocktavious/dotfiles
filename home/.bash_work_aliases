@@ -1,6 +1,38 @@
 #!/bin/bash
 function sshi () {
-    ssh -i ./.ssh/infra01.pem ec2-user@$1
+    ssh -q -i ~/.ssh/infra01.pem ec2-user@$1
+}
+
+function kkillnode() {
+    echo "[UACF] Draining $1 ..."
+    kubectl drain --ignore-daemonsets --delete-local-data --force $1
+    INSTANCE=$(aws ec2 describe-instances --filters 'Name=network-interface.private-dns-name,Values='${1} --output text --query 'Reservations[*].Instances[*].InstanceId')
+    echo "[UACF] Terminating $INSTANCE"
+    aws autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id $INSTANCE
+}
+
+function kroll() {
+  for NODE in $(kubectl get nodes --show-labels | grep $1 | awk '{print $1}');
+  do
+    kkillnode $NODE
+    echo "[UACF] Sleeping for 5m..."
+    sleep 300
+  done
+}
+
+function kcleanup()
+{
+    kubectl delete pod --field-selector="status.phase==Failed"
+}
+
+function knodes() {
+    kubectl get nodes -o=custom-columns-file=/Users/krockman/.kube/ig-view.jsonpath
+}
+
+function kssh() {
+    ip=$(echo $1 | sed -nE "s|([a-z-])*([0-9]{1,3})[.-]([0-9]{1,3})[.-]([0-9]{1,3})[.-]([0-9]{1,3})(.*)|\2.\3.\4.\5|p")
+    echo parsed target ip as $ip
+    ssh -i ~/.ssh/kubernetes.pem core@$ip
 }
 
 function stopcron () {
@@ -12,7 +44,7 @@ function startcron () {
 }
 
 function reset_2fa () {
-    ssh -i ~/.ssh/infra01.pem openvpnas@172.29.0.10 sudo /usr/local/openvpn_as/scripts/sacli --user $1 GoogleAuthRegen
+    ssh -i ~/.ssh/infra01.pem openvpnas@172.29.0.11 sudo /usr/local/openvpn_as/scripts/sacli --user $1 GoogleAuthRegen
 }
 
 function bootstrap_inspect () {
@@ -27,3 +59,5 @@ function fuck_docker () {
     docker-machine rm default
     docker-machine create default --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "8192" --virtualbox-disk-size "100000" --engine-opt bip=172.29.1.1/16
 }
+
+alias vpn='ssh openvpnas@172.29.0.11'

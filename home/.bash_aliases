@@ -74,3 +74,8 @@ function install_pipsi() {
     fi
 }
 
+alias k="kubectl"
+alias kget="kubectl get"
+alias kdel="kubectl delete"
+alias krr="kubectl rollout restart"
+
